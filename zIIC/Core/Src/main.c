@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "miic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,11 +97,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		HAL_GPIO_TogglePin(SCL_GPIO_Port,SCL_Pin);
-		delay_us(500);
-		delay_us(500);
-		delay_us(500);
-		delay_us(500);
+    iic_start();
+    iic_write_byte(0xa0);
+		iic_wait_ack();
+		
+    // iic_ack();
+//    iic_stop();
+    HAL_Delay(100);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
